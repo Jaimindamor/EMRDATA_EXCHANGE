@@ -28,15 +28,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-#Authentions/Permissions define commanly 
-# REST_FRAMEWORK = {  
-#     'DEFAULT_PERMISSION_CLASSES': [     
-#         'rest_framework.permissions.IsAuthenticated', 
-#     ], 
-#     'DEFAULT_AUTHENTICATION_CLASSES': [
-#         'rest_framework.authentication.BasicAuthentication',
-#     ], 
-# } 
+# Authentications/Permissions define commanly 
+REST_FRAMEWORK = {  
+    'DEFAULT_PERMISSION_CLASSES': [     
+        'rest_framework.permissions.IsAuthenticated', 
+    ], 
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+    ], 
+} 
 
 # Application definition
 
