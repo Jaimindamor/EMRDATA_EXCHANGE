@@ -12,7 +12,7 @@ class Patient(models.Model):
     address=models.CharField(max_length=255,blank=True,null=True,default="")
     gender=models.CharField(blank=True,max_length=15,null=True)
     birthdate=models.DateField(blank=True, null=True)
-    emial=models.EmailField(unique=True,blank=True, null=True,default="")
+    emial=models.EmailField(blank=True, null=True,default="")
     country_code=models.CharField(blank=True,max_length=3,null=True,default="")
     city=models.CharField(blank=True,max_length=12,null=True)
     state=models.CharField(blank=True,max_length=14,null=True)
