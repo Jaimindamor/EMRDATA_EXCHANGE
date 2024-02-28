@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .custompermission import Mypermission,Procedurepermission
@@ -6,7 +7,6 @@ from .serializers import PatientSerializer,ProcedureSerializer
 import base64
 # Create your views here.
 class PatientAPI(APIView):
-    permission_classes=[Mypermission]
     def get(self,request,format=None):
         id=request.data.get('id')
         if id is not None:
@@ -43,17 +43,25 @@ class PatientAPI(APIView):
             return Response("Data deleted !!!!!!!!")
 
 class ProcedureAPI(APIView):
-    permission_classes=[Procedurepermission]
     def get(self,request,format=None):
         id=request.data.get('id')  
-        procedure=Procedure.objects.get(id=id)
-        serializer=ProcedureSerializer(procedure)
-        x=serializer['report'].value
-        x=x.encode('utf-8')
-        x=base64.b64encode(x)
-        new_serializer =serializer.data
-        new_serializer['new_report']=x.decode() 
-        return Response(new_serializer)
+        try:
+            procedure=Procedure.objects.get(id=id)
+            if procedure:
+                serializer=ProcedureSerializer(procedure)
+                x=serializer['report'].value
+                if x:
+                    x=x.encode('utf-8')
+                    x=base64.b64encode(x)
+                    new_serializer =serializer.data
+                    new_serializer['new_report']=x.decode() 
+                    return Response(new_serializer)
+                return Response(serializer.data)
+        except:
+            return HttpResponse("Object Not Found !!!!",status=404)
+            
+        
+        
 
     def put(self,request,format=None):
         pythondata=request.data
