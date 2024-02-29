@@ -6,7 +6,7 @@ class Mypermission(BasePermission):
         if request.user.groups.filter(name="Nurse's").exists():
             return True
 
-class Procedurepermission(BasePermission):
+class doctorpermission(BasePermission):
     def has_permission(self, request, view):
         if request.user.groups.filter(name="Doctor's").exists():
             return True
